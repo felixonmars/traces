@@ -2,7 +2,7 @@
 <html>
 	<head>
 		
-			<title>Trace</title>
+			<title>Traces</title>
 		
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -29,11 +29,10 @@
 		
 		<main>
 			
-	<h1>Trace</h1><p>As the author of many libraries which would benefit from tracing, there are few key priorities: (1) zero overhead if tracing is disabled, minimal overhead if enabled, and (2) a small and opinionated interface with standardised semantics. This gem provide such an interface.</p>
-<p>We implement a tracing interface which is largely consistent with the <a href="https://github.com/w3c/trace-context">W3C Trace Context Specification</a>.</p>
+	<h1>Traces</h1><p>Capture nested traces during code execution in a vendor agnostic way. As the author of many libraries which would benefit from tracing, there are few key priorities: (1) zero overhead if tracing is disabled, minimal overhead if enabled, and (2) a small and opinionated interface with standardised semantics. This gem provide such an interface. We implement a tracing interface which is largely consistent with the <a href="https://github.com/w3c/trace-context">W3C Trace Context Specification</a>.</p>
 <p><a href="https://github.com/socketry/traces/actions?workflow=Development"><img src="https://github.com/socketry/traces/workflows/Development/badge.svg" alt="Development Status"/></a></p>
 <section id="installation"><h2>Installation</h2>
-<pre><code>bundle add trace
+<pre><code>bundle add traces
 </code></pre>
 </section><section id="usage"><h2>Usage</h2>
 <p>Please browse the <a href="source/index.html">source code index</a> or refer to the guides below.</p>
@@ -48,6 +47,10 @@
 <li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
 <li>Create new Pull Request</li>
 </ol>
+</section><section id="see-also"><h2>See Also</h2>
+<ul>
+<li><a href="https://github.com/socketry/metrics">metrics</a> — A metrics interface which follows a similar pattern.</li>
+</ul>
 </section><section id="license"><h2>License</h2>
 <p>Released under the MIT license.</p>
 <p>Copyright, 2021, by <a href="http://www.codeotaku.com">Samuel G. D. Williams</a>.</p>
