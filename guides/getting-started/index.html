@@ -39,8 +39,8 @@
 </section><section id="core-concepts"><h2>Core Concepts</h2>
 <p><code>traces</code> has several core concepts:</p>
 <ul>
-<li>A <code class="language-ruby">Trace::Provider</code> which implements custom logic for wrapping existing code in traces.</li>
-<li>A <code class="language-ruby">Trace::Context</code> which represents the current tracing environment which can include distributed tracing.</li>
+<li>A <a href="../../source/Traces/Provider/index.html" title="Traces::Provider"><code class="language-ruby">module Traces::Provider</code></a> which implements custom logic for wrapping existing code in traces.</li>
+<li>A <a href="../../source/Traces/Context/index.html" title="Traces::Context"><code class="language-ruby">class Traces::Context</code></a> which represents the current tracing environment which can include distributed tracing.</li>
 </ul>
 </section><section id="usage"><h2>Usage</h2>
 <p>There are two main aspects to integrating within this gem.</p>
@@ -49,7 +49,7 @@
 <li>Those traces must be consumed or emitted somewhere.</li>
 </ol>
 </section><section id="providing-traces"><h3>Providing Traces</h3>
-<p>Adding tracing to libraries requires the use of <code class="language-ruby">Trace::Provider</code>:</p>
+<p>Adding tracing to libraries requires the use of <a href="../../source/Traces/Provider/index.html" title="Traces::Provider"><code class="language-ruby">module Traces::Provider</code></a>:</p>
 <pre><code class="language-ruby">require 'traces'
 
 class MyClass
