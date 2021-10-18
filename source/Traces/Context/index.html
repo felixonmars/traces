@@ -77,7 +77,7 @@ end</code></pre>
 <details>
 						<summary><h4>Implementation</h4></summary>
 						<pre><code class="language-ruby">def self.local(flags = 0, **options)
-	self.new(SecureRandom.hex(16), SecureRandom.hex(8), flags, options)
+	self.new(SecureRandom.hex(16), SecureRandom.hex(8), flags, **options)
 end</code></pre>
 					</details></section><section id="Traces::Context.nested"><h3><code class="language-ruby">def self.nested(parent, flags = 0)</code></h3><p>Nest a local trace context in an optional parent context.</p>
 <details open>
