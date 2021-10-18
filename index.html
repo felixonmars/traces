@@ -29,14 +29,22 @@
 		
 		<main>
 			
-	<h1>Traces</h1><p>Capture nested traces during code execution in a vendor agnostic way. As the author of many libraries which would benefit from tracing, there are few key priorities: (1) zero overhead if tracing is disabled, minimal overhead if enabled, and (2) a small and opinionated interface with standardised semantics. This gem provide such an interface. We implement a tracing interface which is largely consistent with the <a href="https://github.com/w3c/trace-context">W3C Trace Context Specification</a>.</p>
+	<h1>Traces</h1><p>Capture nested traces during code execution in a vendor agnostic way.</p>
 <p><a href="https://github.com/socketry/traces/actions?workflow=Development"><img src="https://github.com/socketry/traces/workflows/Development/badge.svg" alt="Development Status"/></a></p>
-<section id="installation"><h2>Installation</h2>
-<pre><code>bundle add traces
-</code></pre>
+<section id="features"><h2>Features</h2>
+<ul>
+<li>Zero-overhead if tracing is disabled and minimal overhead if enabled.</li>
+<li>Small opinionated interface with standardised semantics, consistent with the <a href="https://github.com/w3c/trace-context">W3C Trace Context Specification</a>.</li>
+</ul>
 </section><section id="usage"><h2>Usage</h2>
 <p>Please browse the <a href="source/index.html">source code index</a> or refer to the guides below.</p>
 
+	<section>
+		<h3><a href="guides/getting-started/index.html">Getting Started</a></h3>
+		
+			<p>This guide explains how to use <code>traces</code> for tracing code execution.</p>
+
+	</section>
 
 </section><section id="contributing"><h2>Contributing</h2>
 <p>We welcome contributions to this project.</p>
