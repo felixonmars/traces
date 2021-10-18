@@ -41,6 +41,7 @@
 <ul>
 <li>A <a href="../../source/Traces/Provider/index.html" title="Traces::Provider"><code class="language-ruby">module Traces::Provider</code></a> which implements custom logic for wrapping existing code in traces.</li>
 <li>A <a href="../../source/Traces/Context/index.html" title="Traces::Context"><code class="language-ruby">class Traces::Context</code></a> which represents the current tracing environment which can include distributed tracing.</li>
+<li>A <a href="http://localhost:43519/source/Traces/Backend/index" title="Traces::Backend"><code class="language-ruby">module Traces::Backend</code></a> which connects traces to a specific backend system for processing.</li>
 </ul>
 </section><section id="usage"><h2>Usage</h2>
 <p>There are two main aspects to integrating within this gem.</p>
@@ -73,7 +74,7 @@ end
 
 MyClass.new.my_method
 </code></pre>
-<p>This code by itself will not create any traces. In order to execute it and output traces, you must set up a consumer.</p>
+<p>This code by itself will not create any traces. In order to execute it and output traces, you must set up a backend to consume them.</p>
 </section><section id="consuming-traces"><h3>Consuming Traces</h3>
 <p>Consuming traces means proving a backend implementation which can emit those traces to some log or service. There are several options, but two backends are included by default:</p>
 <ul>
