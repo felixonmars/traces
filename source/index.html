@@ -12,6 +12,7 @@
 		
 		<script src="../_components/jquery/jquery.min.js"></script>
 		<script src="../_components/jquery-syntax/jquery.syntax.min.js"></script>
+		<script src="../_components/mermaid/mermaid.min.js"></script>
 		
 		<script src="../_static/links.js"></script>
 		
@@ -20,6 +21,12 @@
 			jQuery(function($) {
 				$.syntax();
 			});
+			
+			let isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+			let config = {theme: 'light'};
+			if (isDarkMode) config.theme = 'dark';
+			else config.theme = 'forest';
+			mermaid.initialize(config);
 		//]]>
 		</script>
 	</head>
@@ -32,19 +39,19 @@
 	<h1>Overview</h1>
 	
 	<ul class="index"><li>
-						<a href="http://localhost:43519/source/Fiber/index"><code class="language-ruby">class Fiber</code></a>
+						<a href="Fiber/index.html"><code class="language-ruby">class Fiber</code></a>
 						
 						
 						
 					
 					<ul class="index"></ul>				</li><li>
-						<a href="http://localhost:43519/source/Traces/index"><code class="language-ruby">module Traces</code></a>
+						<a href="Traces/index.html"><code class="language-ruby">module Traces</code></a>
 						
 						
 						
 					
 					<ul class="index"><li>
-						<a href="http://localhost:43519/source/Traces/Backend/index"><code class="language-ruby">module Backend</code></a>
+						<a href="Traces/Backend/index.html"><code class="language-ruby">module Backend</code></a>
 						
 						
 						
@@ -68,7 +75,7 @@
 					<ul class="index"><li>
 					
 									</li></ul>				</li><li>
-						<a href="http://localhost:43519/source/Traces/Backend/Console/Interface/index"><code class="language-ruby">module Interface</code></a>
+						<a href="Traces/Backend/Console/Interface/index.html"><code class="language-ruby">module Interface</code></a>
 						
 						
 						
@@ -98,7 +105,7 @@
 					<ul class="index"><li>
 					
 									</li></ul>				</li><li>
-						<a href="http://localhost:43519/source/Traces/Backend/Test/Interface/index"><code class="language-ruby">module Interface</code></a>
+						<a href="Traces/Backend/Test/Interface/index.html"><code class="language-ruby">module Interface</code></a>
 						
 						
 						

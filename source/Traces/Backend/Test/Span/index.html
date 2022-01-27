@@ -12,6 +12,7 @@
 		
 		<script src="../../../../../_components/jquery/jquery.min.js"></script>
 		<script src="../../../../../_components/jquery-syntax/jquery.syntax.min.js"></script>
+		<script src="../../../../../_components/mermaid/mermaid.min.js"></script>
 		
 		<script src="../../../../../_static/links.js"></script>
 		
@@ -20,6 +21,12 @@
 			jQuery(function($) {
 				$.syntax();
 			});
+			
+			let isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+			let config = {theme: 'light'};
+			if (isDarkMode) config.theme = 'dark';
+			else config.theme = 'forest';
+			mermaid.initialize(config);
 		//]]>
 		</script>
 	</head>
@@ -52,11 +59,11 @@
 						<summary><h4>Implementation</h4></summary>
 						<pre><code class="language-ruby">def []= key, value
 	unless key.is_a?(String)
-		raise ArgumentError, &quot;Invalid name!&quot;
+		raise ArgumentError, &quot;Invalid name (must be String): #{key.inspect}!&quot;
 	end
 	
 	unless String(value)
-		raise ArgumentError, &quot;Invalid value!&quot;
+		raise ArgumentError, &quot;Invalid value (must be String): #{value.inspect}!&quot;
 	end
 end</code></pre>
 					</details></section>	</section>
@@ -68,3 +75,4 @@ end</code></pre>
 		</main>
 	</body>
 </html>
+
