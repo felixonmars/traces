@@ -45,7 +45,7 @@
 	<section>
 	<h2>Definitions</h2>
 	
-	<section id="Traces::Backend::Console::Interface#trace"><h3><code class="language-ruby">def trace(name, attributes: {}, &amp;block)</code></h3><p>Trace the given block of code and log the execution.</p>
+	<section id="Traces::Backend::Console::Interface#trace"><h3><code class="language-ruby">def trace(name, resource: self, attributes: {}, &amp;block)</code></h3><p>Trace the given block of code and log the execution.</p>
 <details open>
 	<summary><h4>Signature</h4></summary>
 	<dl><dt>
@@ -56,11 +56,11 @@
 </details>
 <details>
 						<summary><h4>Implementation</h4></summary>
-						<pre><code class="language-ruby">def trace(name, attributes: {}, &amp;block)
+						<pre><code class="language-ruby">def trace(name, resource: self, attributes: {}, &amp;block)
 	context = Context.nested(Fiber.current.traces_backend_context)
 	Fiber.current.traces_backend_context = context
 	
-	::Console.logger.info(self, name, attributes)
+	::Console.logger.info(resource, name, attributes)
 	
 	if block.arity.zero?
 		yield
