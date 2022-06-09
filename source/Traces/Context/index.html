@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+			<title>Traces::Context</title>
+		
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		
+		<link rel="icon" type="image/png" href="../../../_static/icon.png"/>
+		<link rel="stylesheet" href="../../../_static/site.css" type="text/css" media="screen"/>
+		
+		<script src="../../../_components/jquery/jquery.min.js"></script>
+		<script src="../../../_components/jquery-syntax/jquery.syntax.min.js"></script>
+		<script src="../../../_components/mermaid/mermaid.min.js"></script>
+		
+		<script src="../../../_static/links.js"></script>
+		
+		<script type="text/javascript">
+		//<![CDATA[
+			jQuery(function($) {
+				$.syntax();
+			});
+			
+			let isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+			let config = {theme: 'light'};
+			if (isDarkMode) config.theme = 'dark';
+			else config.theme = 'forest';
+			mermaid.initialize(config);
+		//]]>
+		</script>
+	</head>
+
+	<body>
+		<header> › <a class="link" href="../../../index.html">Project</a> › <a class="link" href="../../index.html">Source</a></header>
+		
+		<main>
+			
+	<h1>Traces::Context</h1>
+	
+	<p>
+		<code class="language-ruby">class Traces::Context</code>
+	</p>
+	
+	<p>A generic representation of the current tracing context.</p>
+	
+	
+	
+	
+	<section>
+	<h2>Definitions</h2>
+	
+	<section id="Traces::Context.parse"><h3><code class="language-ruby">def self.parse(parent, state = nil, **options)</code></h3><p>Parse a string representation of a distributed trace.</p>
+<details open>
+	<summary><h4>Signature</h4></summary>
+	<dl><dt>
+					<strong>parameter</strong>　<code class="syntax">parent</code>　<code class="language-ruby">String</code></dt><dd><p>The parent trace context.</p>
+</dd><dt>
+					<strong>parameter</strong>　<code class="syntax">state</code>　<code class="language-ruby">Array(String)</code></dt><dd><p>Any attached trace state.</p>
+</dd></dl>
+</details>
+<details>
+						<summary><h4>Implementation</h4></summary>
+						<pre><code class="language-ruby">def self.parse(parent, state = nil, **options)
+	version, trace_id, parent_id, flags = parent.split('-')
+	
+	if version == '00'
+		flags = Integer(flags, 16)
+		
+		if state.is_a?(String)
+			state = state.split(',')
+		end
+		
+		if state
+			state = state.map{|item| item.split('=')}
+		end
+		
+		self.new(trace_id, parent_id, flags, state, **options)
+	end
+end</code></pre>
+					</details></section><section id="Traces::Context.local"><h3><code class="language-ruby">def self.local(flags = 0, **options)</code></h3><p>Create a local trace context which is likley to be globally unique.</p>
+<details open>
+	<summary><h4>Signature</h4></summary>
+	<dl><dt>
+					<strong>parameter</strong>　<code class="syntax">flags</code>　<code class="language-ruby">Integer</code></dt><dd><p>Any trace context flags.</p>
+</dd></dl>
+</details>
+<details>
+						<summary><h4>Implementation</h4></summary>
+						<pre><code class="language-ruby">def self.local(flags = 0, **options)
+	self.new(SecureRandom.hex(16), SecureRandom.hex(8), flags, **options)
+end</code></pre>
+					</details></section><section id="Traces::Context.nested"><h3><code class="language-ruby">def self.nested(parent, flags = 0)</code></h3><p>Nest a local trace context in an optional parent context.</p>
+<details open>
+	<summary><h4>Signature</h4></summary>
+	<dl><dt>
+					<strong>parameter</strong>　<code class="syntax">parent</code>　<code class="language-ruby"><a href="index.html" title="Traces::Context">Context</a></code></dt><dd><p>An optional parent context.</p>
+</dd></dl>
+</details>
+<details>
+						<summary><h4>Implementation</h4></summary>
+						<pre><code class="language-ruby">def self.nested(parent, flags = 0)
+	if parent
+		parent.nested(flags)
+	else
+		self.local(flags)
+	end
+end</code></pre>
+					</details></section><section id="Traces::Context#nested"><h3><code class="language-ruby">def nested(flags = @flags)</code></h3><p>Create a new nested trace context in which spans can be recorded.</p>
+<details>
+						<summary><h4>Implementation</h4></summary>
+						<pre><code class="language-ruby">def nested(flags = @flags)
+	Context.new(@trace_id, SecureRandom.hex(8), flags, @state, remote: @remote)
+end</code></pre>
+					</details></section><section id="Traces::Context#trace_id"><h3><code class="language-ruby">attr :trace_id</code></h3><p>The ID of the whole trace forest and is used to uniquely identify a distributed trace through a system. It is represented as a 16-byte array, for example, 4bf92f3577b34da6a3ce929d0e0e4736. All bytes as zero (00000000000000000000000000000000) is considered an invalid value.</p>
+</section><section id="Traces::Context#parent_id"><h3><code class="language-ruby">attr :parent_id</code></h3><p>The ID of this request as known by the caller (in some tracing systems, this is known as the span-id, where a span is the execution of a client request). It is represented as an 8-byte array, for example, 00f067aa0ba902b7. All bytes as zero (0000000000000000) is considered an invalid value.</p>
+</section><section id="Traces::Context#flags"><h3><code class="language-ruby">attr :flags</code></h3><p>An 8-bit field that controls tracing flags such as sampling, trace level, etc. These flags are recommendations given by the caller rather than strict rules.</p>
+</section><section id="Traces::Context#state"><h3><code class="language-ruby">attr :state</code></h3><p>Provides additional vendor-specific trace identification information across different distributed tracing systems. Conveys information about the request’s position in multiple distributed tracing graphs.</p>
+</section><section id="Traces::Context#sampled?"><h3><code class="language-ruby">def sampled?</code></h3><p>Denotes that the caller may have recorded trace data. When unset, the caller did not record trace data out-of-band.</p>
+<details>
+						<summary><h4>Implementation</h4></summary>
+						<pre><code class="language-ruby">def sampled?
+	@flags &amp; SAMPLED
+end</code></pre>
+					</details></section><section id="Traces::Context#remote?"><h3><code class="language-ruby">def remote?</code></h3><p>Whether this context was created from a distributed trace header.</p>
+<details>
+						<summary><h4>Implementation</h4></summary>
+						<pre><code class="language-ruby">def remote?
+	@remote
+end</code></pre>
+					</details></section><section id="Traces::Context#to_s"><h3><code class="language-ruby">def to_s</code></h3><p>A string representation of the trace context (excluding trace state).</p>
+<details>
+						<summary><h4>Implementation</h4></summary>
+						<pre><code class="language-ruby">def to_s
+	&quot;00-#{@trace_id}-#{@parent_id}-#{@flags.to_s(16)}&quot;
+end</code></pre>
+					</details></section>	</section>
+	
+	
+
+				
+			<footer>Documentation generated by <a href="https://github.com/socketry/utopia-project">Utopia::Project</a>.</footer>
+		</main>
+	</body>
+</html>
+
