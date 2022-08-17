@@ -32,24 +32,20 @@
 	</head>
 
 	<body>
-		<header> › <a class="link" href="../../../../../index.html">Project</a> › <a class="link" href="../../../../index.html">Source</a></header>
+		<header> › <a class="link" href="../../../../../index.html">Project</a> › <a class="link" href="../../../../index.html">Source</a> › <a href="../../../index.html">Traces</a>  › <a href="../../index.html">Backend</a>  › <a href="../index.html">Test</a>  › <a href="index.html">Interface</a> </header>
 		
 		<main>
 			
-	<h1>Traces::Backend::Test::Interface</h1>
-	
-	<p>
-		<code class="language-ruby">module Traces::Backend::Test::Interface</code>
-	</p>
+
+	<h1>
+		<code class="language-ruby">module Interface</code>
+	</h1>
 	
 		
-	
-	
-	
 	<section>
-	<h2>Definitions</h2>
-	
-	<section id="Traces::Backend::Test::Interface#trace"><h3><code class="language-ruby">def trace(name, resource: self.class.name, attributes: nil, &amp;block)</code></h3><p>Trace the given block of code and validate the interface usage.</p>
+		<h2>Definitions</h2>
+		
+		<section id="Traces::Backend::Test::Interface#trace"><h3><code class="language-ruby">def trace(name, resource: self.class.name, attributes: nil, &amp;block)</code></h3><p>Trace the given block of code and validate the interface usage.</p>
 <details open>
 	<summary><h4>Signature</h4></summary>
 	<dl><dt>
@@ -61,6 +57,10 @@
 <details>
 						<summary><h4>Implementation</h4></summary>
 						<pre><code class="language-ruby">def trace(name, resource: self.class.name, attributes: nil, &amp;block)
+	unless block_given?
+		raise ArgumentError, &quot;No block given!&quot;
+	end
+	
 	unless name.is_a?(String)
 		raise ArgumentError, &quot;Invalid name (must be String): #{name.inspect}!&quot;
 	end
@@ -93,7 +93,6 @@ end</code></pre>
 	Fiber.current.traces_backend_context
 end</code></pre>
 					</details></section>	</section>
-	
 	
 
 				

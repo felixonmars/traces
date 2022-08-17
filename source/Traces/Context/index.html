@@ -32,25 +32,21 @@
 	</head>
 
 	<body>
-		<header> › <a class="link" href="../../../index.html">Project</a> › <a class="link" href="../../index.html">Source</a></header>
+		<header> › <a class="link" href="../../../index.html">Project</a> › <a class="link" href="../../index.html">Source</a> › <a href="../index.html">Traces</a>  › <a href="index.html">Context</a> </header>
 		
 		<main>
 			
-	<h1>Traces::Context</h1>
-	
-	<p>
-		<code class="language-ruby">class Traces::Context</code>
-	</p>
+
+	<h1>
+		<code class="language-ruby">class Context</code>
+	</h1>
 	
 	<p>A generic representation of the current tracing context.</p>
 	
-	
-	
-	
 	<section>
-	<h2>Definitions</h2>
-	
-	<section id="Traces::Context.parse"><h3><code class="language-ruby">def self.parse(parent, state = nil, **options)</code></h3><p>Parse a string representation of a distributed trace.</p>
+		<h2>Definitions</h2>
+		
+		<section id="Traces::Context.parse"><h3><code class="language-ruby">def self.parse(parent, state = nil, **options)</code></h3><p>Parse a string representation of a distributed trace.</p>
 <details open>
 	<summary><h4>Signature</h4></summary>
 	<dl><dt>
@@ -135,7 +131,6 @@ end</code></pre>
 	&quot;00-#{@trace_id}-#{@parent_id}-#{@flags.to_s(16)}&quot;
 end</code></pre>
 					</details></section>	</section>
-	
 	
 
 				
