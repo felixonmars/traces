@@ -58,12 +58,12 @@
 <details>
 						<summary><h4>Implementation</h4></summary>
 						<pre><code class="language-ruby">def []= key, value
-	unless key.is_a?(String)
-		raise ArgumentError, &quot;Invalid name (must be String): #{key.inspect}!&quot;
+	unless key.is_a?(String) || key.is_a?(Symbol)
+		raise ArgumentError, &quot;Invalid name (must be String or Symbol): #{key.inspect}!&quot;
 	end
 	
 	unless String(value)
-		raise ArgumentError, &quot;Invalid value (must be String): #{value.inspect}!&quot;
+		raise ArgumentError, &quot;Invalid value (must be convertible to String): #{value.inspect}!&quot;
 	end
 end</code></pre>
 					</details></section>	</section>
